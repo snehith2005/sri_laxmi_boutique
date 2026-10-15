@@ -35,11 +35,11 @@ app = FastAPI(title="Boutique API")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[o.strip().rstrip("/") for o in settings.allowed_origins.split(",") if o.strip()],
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 app.include_router(auth.router)
 app.include_router(products.router)
 app.include_router(favorites.router)
